@@ -1,11 +1,11 @@
-package com.arlen.photo.widget;
+package com.arlen.photo.photopickup.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.arlen.photo.util.DensityUtils;
+import com.arlen.photo.photopickup.util.DensityUtils;
 
 import java.util.LinkedList;
 

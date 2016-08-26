@@ -1,4 +1,4 @@
-package com.arlen.photo.util;
+package com.arlen.photo.photopickup.util;
 
 import android.annotation.TargetApi;
 import android.content.ContentUris;
@@ -620,5 +620,17 @@ public class FileSizeUtil {
         }
 
         return false;
+    }
+    /**
+     *
+     * @param fileAbsPath
+     * @return
+     */
+    public static final boolean isFileExists(String fileAbsPath)
+    {
+        if(TextUtils.isEmpty(fileAbsPath))
+            return false;
+        File path = new File(fileAbsPath);
+        return path.exists();
     }
 }

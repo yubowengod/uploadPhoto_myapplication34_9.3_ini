@@ -22,7 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlen.photo.R;
-import com.arlen.photo.util.FileSizeUtil;
+import com.arlen.photo.photopickup.util.FileSizeUtil;
 
 import java.io.File;
 import java.io.IOException;

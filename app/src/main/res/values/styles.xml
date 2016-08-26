@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -21,9 +21,10 @@
         <item name="@android:windowExitAnimation">@anim/push_bottom_out</item>
     </style>
 
-    <style name="line">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">0.5dp</item>
-        <item name="android:background">#aae0e0e0</item>
+    <!--横竖自定义线-->
+    <style name="Line">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">0.8dp</item>
+    <item name="android:background">#ededed</item>
     </style>
 </resources>

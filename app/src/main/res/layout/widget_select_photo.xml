@@ -4,7 +4,7 @@
     android:background="@color/bg_gray_alt"
     android:orientation="vertical">
 
-    <View style="@style/line" />
+    <View style="@style/Line" />
 
     <TextView
         android:id="@+id/btn_take_photo"
@@ -16,7 +16,7 @@
         android:textColor="#242424"
         android:textSize="18sp" />
 
-    <View style="@style/line" />
+    <View style="@style/Line" />
 
     <TextView
         android:id="@+id/btn_pick_photo"
@@ -28,7 +28,7 @@
         android:textColor="#242424"
         android:textSize="18sp" />
 
-    <View style="@style/line" />
+    <View style="@style/Line" />
 
     <TextView
         android:id="@+id/tv_cancel"
