@@ -1,3 +1,43 @@
 <resources>
-    <string name="app_name">uploadPhoto</string>
+    <string name="app_name">嘻嘻我是哈哈</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+
+
+    <string name="tab_menu_alert">主页</string>
+    <string name="tab_menu_profile">信息</string>
+    <string name="tab_menu_pay">我的</string>
+    <string name="tab_menu_setting">设置</string>
+
+
+
+    <string name="xianlu_bottom_left">主页</string>
+    <string name="xianlu_bottom_right">返回</string>
+
+    <string name="crm_bottom_1">主页</string>
+    <string name="crm_bottom_2">重置线路</string>
+    <string name="crm_bottom_3">重置页面</string>
+    <string name="crm_bottom_4">下一步</string>
+
+    <string name="take_pic_specification">拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书拍照说明书</string>
+
+
+    <string name="user_name">工号：</string>
+    <string name="user_password">密码：</string>
+    <string name="login">登录</string>
+    <string name="find_password">找回密码</string>
+    <string name="phone_register">快速注册</string>
+    <string name="weixin_login">微信登录</string>
+    <string name="other_login">其他方式登录</string>
+    <string name="register">注册</string>
+    <string name="please_password">请输入密码</string>
+    <string name="wrong_password">密码未匹配</string>
+    <string name="please_name">请输入用户名</string>
+    <string name="wrong_name">用户名未匹配</string>
+
+
+
+
 </resources>
