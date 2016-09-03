@@ -43,7 +43,7 @@ public class BasePhotoPickupActivity extends Activity {
     private TextView mTvCancel;
     private final LinkedList<MediaUtils.ImageProperty> mSelectedImgPros = new LinkedList<MediaUtils.ImageProperty>();
     private int CURRENT_SEL_PHOTOS;
-    private int MAX_SELETED_PHOTOS = 10;
+    private int MAX_SELETED_PHOTOS = 20;//ini  10
     private ArrayList<String> mInitSelImgIds;
     private final MyContentObserver myContentObserver = new MyContentObserver(new Handler());
     private static final int SEL_MODE_SINGLE = 0;
@@ -151,7 +151,7 @@ public class BasePhotoPickupActivity extends Activity {
 
         // 照片墙
         mPhotoThumbnailGrid = (RecyclerView) findViewById(R.id.photo_thumbnail_list_view);
-        mPhotoThumbnailGrid.setLayoutManager(new GridLayoutManager(this, 3));//这里用线性宫格显示 类似于grid view
+        mPhotoThumbnailGrid.setLayoutManager(new GridLayoutManager(this, 4));//这里用线性宫格显示 类似于grid view
         mItemAdapter = new ItemAdapter();
         mPhotoThumbnailGrid.setAdapter(mItemAdapter);
 
