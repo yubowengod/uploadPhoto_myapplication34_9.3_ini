@@ -43,7 +43,7 @@ public class BasePhotoPickupActivity extends Activity {
     private TextView mTvCancel;
     private final LinkedList<MediaUtils.ImageProperty> mSelectedImgPros = new LinkedList<MediaUtils.ImageProperty>();
     private int CURRENT_SEL_PHOTOS;
-    private int MAX_SELETED_PHOTOS = 20;//ini  10
+    private int MAX_SELETED_PHOTOS = 10;//ini  10
     private ArrayList<String> mInitSelImgIds;
     private final MyContentObserver myContentObserver = new MyContentObserver(new Handler());
     private static final int SEL_MODE_SINGLE = 0;

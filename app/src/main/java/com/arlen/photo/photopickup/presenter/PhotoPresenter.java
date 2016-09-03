@@ -28,11 +28,11 @@ public class PhotoPresenter extends BasePhotoPresenter implements SimpleGrid.Cal
 
     private Activity mContext;
     private String mType;
-    private ArrayList<MediaUtils.ImageProperty> mSelectedImgPros;
+    public ArrayList<MediaUtils.ImageProperty> mSelectedImgPros;//dizhi.fullpath
 
     private SimpleGrid mSimpleGrid;
 
-    private static final int MAX_SEL_PHOTOS = 20;//ini 10
+    private static final int MAX_SEL_PHOTOS = 10;//ini 10
 
     /**
      *
