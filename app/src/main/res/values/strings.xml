@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">嘻嘻我是哈哈</string>
+    <string name="app_name">中国中车浦厂</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -37,6 +37,7 @@
     <string name="please_name">请输入用户名</string>
     <string name="wrong_name">用户名未匹配</string>
 
+    <string name="user_repassword">重输密码：</string>
 
 
 

@@ -260,7 +260,7 @@ public class crm_main_activity extends Activity {
         text_zaizhuangxianlu_num = (TextView) findViewById(R.id.crm_main_zaizhuangxianlu_num);
         text_chehao.setText(xianlu_up_chehao);
         text_chexing.setText(xianlu_up_chexing);
-        text_zaizhuangxianlu.setText(xianlu_up_zaizhuangxianlu);
+        text_zaizhuangxianlu.setText("线路："+xianlu_up_zaizhuangxianlu);
         text_zaizhuangxianlu_num.setText(xianlu_up_zaizhuangxianlu_num);
 
 

@@ -17,17 +17,36 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/chinazhongche"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <activity android:name=".welcome_activity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".LoginActivity">
+        </activity>
+
+        <activity android:name=".register.registerActivity"></activity>
+
+        <activity android:name=".MainActivity_login">
+        </activity>
 
         <activity android:name=".ui.MainActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:screenOrientation="portrait">
-
         </activity>
+
+        <activity android:name=".xianlu_main_activity"></activity>
+
+        <activity android:name=".crm_main_activity"></activity>
+
         <activity
             android:name=".photopickup.view.PhotoPickupActivity"
             android:label="照片选择"
@@ -41,26 +60,20 @@
 
 
 
-        <activity android:name=".MainActivity_login"
 
-            >
 
-        </activity>
 
-        <activity android:name=".welcome_activity"
-            android:label="@string/app_name">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
 
-        <activity android:name=".LoginActivity">
-        </activity>
 
-        <activity android:name=".xianlu_main_activity">
-        </activity>
-        <activity android:name=".crm_main_activity"></activity>
+
+
+
+
+
+
+
+
+
         <activity android:name=".take_pic"></activity>
 
     </application>

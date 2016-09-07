@@ -54,7 +54,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:background="#fffbfbfb"
-
                     android:singleLine="true" />
             </LinearLayout>
 
@@ -64,7 +63,7 @@
                 android:background="#ffc8c8c8" />
 
             <LinearLayout
-                android:id="@+id/ssss"
+                android:id="@+id/password_register"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:gravity="center_vertical"
@@ -79,7 +78,7 @@
                     android:textSize="18sp" />
 
                 <EditText
-                    android:id="@+id/login_input_password"
+                    android:id="@+id/register_input_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -90,13 +89,54 @@
                     />
 
                 <CheckBox
-                    android:id="@+id/login_switchBtn"
+                    android:id="@+id/register_switchBtn_1"
                     android:layout_width="55dp"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
                     android:button="@drawable/login_hide_password_selector"
                     android:clickable="true" />
             </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffc8c8c8" />
+
+            <LinearLayout
+                android:id="@+id/re_password_register"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/user_repassword"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <EditText
+                    android:id="@+id/register_input_repassword"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="#fffbfbfb"
+                    android:inputType="textPassword"
+                    android:layout_marginRight="5dp"
+                    android:singleLine="true"
+                    />
+
+                <CheckBox
+                    android:id="@+id/register_switchBtn_2"
+                    android:layout_width="55dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:button="@drawable/login_hide_password_selector"
+                    android:clickable="true" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <RelativeLayout
@@ -112,7 +152,7 @@
                 android:layout_marginRight="13dp"
                 android:layout_marginTop="13dp"
                 android:background="@drawable/login_layout_btn_bg"
-                android:text="@string/login"
+                android:text="@string/register"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"
                 android:onClick="checkLogin"/>
@@ -126,30 +166,9 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginTop="13dp"
                 android:gravity="center_vertical" >
-                <TextView
-                    android:id="@+id/find_password_repassword_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:text="@string/find_password"
-                    android:clickable="true"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"/>
 
-                <TextView
-                    android:id="@+id/register_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="@string/phone_register"
-                    android:clickable="true"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"/>
             </RelativeLayout>
-            <RelativeLayout
-                android:layout_below="@+id/login_btn_findpassword_register"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"></RelativeLayout>
+
 
 
         </RelativeLayout>

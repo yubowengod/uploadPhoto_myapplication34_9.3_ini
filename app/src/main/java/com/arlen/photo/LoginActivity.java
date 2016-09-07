@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
+import com.arlen.photo.register.registerActivity;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,6 +24,12 @@ public class LoginActivity extends Activity {
     private CheckBox login_switchBtn;
 
 
+//    ????????????????????
+
+    private TextView find_password_repassword_login;
+    private TextView register_login;
+//    ????????????????????
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +38,23 @@ public class LoginActivity extends Activity {
         login_input_name = (TextView) findViewById(R.id.login_input_name);
         login_input_password = (TextView) findViewById(R.id.login_input_password);
         login_switchBtn = (CheckBox) findViewById(R.id.login_switchBtn);
+
+        register_login = (TextView) findViewById(R.id.register_login);
+        register_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(LoginActivity.this,registerActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+
         onChangePassLook listener = new onChangePassLook();
         login_switchBtn.setOnCheckedChangeListener(listener);
+
     }
+
 
     public void checkLogin(View v) {
 
@@ -40,6 +63,8 @@ public class LoginActivity extends Activity {
 //        if (checkLoginName(login_input_name.getText().toString())
 //                && checkLoginPass(login_input_password.getText().toString()))
 //        {
+
+
             Intent intent =new Intent(this, MainActivity_login.class);
             startActivity(intent);
             finish();
