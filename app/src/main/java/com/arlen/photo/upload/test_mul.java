@@ -1,6 +1,7 @@
 package com.arlen.photo.upload;
 import android.os.Handler;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -39,7 +40,7 @@ public class test_mul {
 
     private ImageView image;
     private static final String SERVICE_NAMESPACE ="http://tempuri.org/"; //http://tempuri.org/
-//    public String SERVICE_NAMESPACE = "http://tempuri.org/";
+    //    public String SERVICE_NAMESPACE = "http://tempuri.org/";
     //    private static String SERVICE_URL = "http://192.168.1.102:8011/Service1.asmx";
     private String methodName = "FileUploadImage ";   //设置方法名  FileUploadImage
     private SoapObject result;
@@ -60,22 +61,29 @@ public class test_mul {
 
 
     public  static void getImageromSdk( ArrayList<String> pic_path){
-
-
-
         Log.i("进入获取图片方法", "进入获取图片方法");
 
         String[] strArray=null;
 
         try{
-//            String srcUrl = "/storage/sdcard0/"; //路径
+            String srcUrl = "/storage/sdcard0/"; //路径
+
 //            mPhotoPresenter1.mSelectedImgPros.get(0).fullPath.toString();
+//
 //            String fileName1 = "qwe.png";  //文件名
 //            String fileName2 = "qwer.png";//文件名
+//            String fileName3 = "qwert.png";
+//            String fileName4 = "qwerty.png";
+//            String fileName5 = "qwertyu.png";
+//
 //            List<String>imageList=new ArrayList<>();//定义一个list，里面装2个图片地址，模拟批量上传
 //            imageList.add(fileName1);
 //            imageList.add(fileName2);
-
+//            imageList.add(fileName3);
+//            imageList.add(fileName4);
+//            imageList.add(fileName5);
+//            imageList.add(fileName5);
+//            imageList.add(fileName5);
 
 
             for (int i = 0; i < pic_path.size(); i++) {
@@ -145,4 +153,5 @@ public class test_mul {
         return null;
     };
 
+//test
 }

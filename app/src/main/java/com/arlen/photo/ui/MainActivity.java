@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.arlen.photo.R;
@@ -33,6 +34,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private TextView pic_info;
 
+    private ProgressBar pb_progressbar;
+
 
     public PhotoPresenter mPhotoPresenter;
 
@@ -47,6 +50,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
     private ExecutorService executorService;
 
+    private int flag_btn_upload = 0;
 
 
 
@@ -63,27 +67,32 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         pic_info = (TextView) findViewById(R.id.pic_info);
 
+        pb_progressbar = (ProgressBar) findViewById(R.id.pb_progressbar);
+
         btn_pic_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                pic_info.setText(mPhotoPresenter.mSelectedImgPros.get(0).fullPath.toString());
-
-               for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size() ; i++)
-               {
-                   pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
-               }
-
+//                判断pic_path内是否有重复的元素
+                flag_btn_upload++;
+                if(flag_btn_upload%2 == 1){
+                    for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
+                    {
+                        pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
+                    }
+                }
+                else if(flag_btn_upload%2 == 0){
+                    pic_path.clear();
+                    for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
+                    {
+                        pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
+                    }
+                }
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
                         test_mul.getImageromSdk(pic_path);
                     }
                 });
-
-
-
-
             }
         });
 
