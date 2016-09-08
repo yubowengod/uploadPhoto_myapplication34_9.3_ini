@@ -92,110 +92,9 @@ private Button btn;
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xianlu_main);
-
-
-
         handler = new Handler();
-
-
         executorService = Executors.newFixedThreadPool(5);
-
         listview_download();
-
-
-//        final ListView myListView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
-//        ArrayList<HashMap<String,String>> myArrayList = new ArrayList<HashMap<String,String>>();
-//
-//        for(int i=40;i>=1;i--){
-//            HashMap<String, String> map = new HashMap<String, String>();
-//            map.put("xianlu_name", "线路 "+i);
-//            map.put("xianlu_num", "车体数量 "+i);
-//            myArrayList.add(map);
-//        }
-//
-//        //生成SimpleAdapter适配器对象
-//        SimpleAdapter mySimpleAdapter=new SimpleAdapter(this,
-//                myArrayList,//数据源
-//                R.layout.xianlu_main_listview_item,//ListView内部数据展示形式的布局文件listitem.xml
-//                new String[]{"xianlu_name","xianlu_num"},//HashMap中的两个key值 itemTitle和itemContent
-//                new int[]{R.id.xianlu_name,R.id.xianlu_num});/*布局文件listitem.xml中组件的id
-//                                                            布局文件的各组件分别映射到HashMap的各元素上，完成适配*/
-//
-//        myListView.setAdapter(mySimpleAdapter);
-        //添加点击事件
-//        myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                HashMap<String,String> map = (HashMap<String,String>) myListView.getItemAtPosition(position);
-//                xianluname_str = map.get("xianlu_name");
-//                xianlunum_str = map.get("xianlu_num");
-//                Toast.makeText(getApplicationContext(),
-//                        "你选择了第"+position+"个Item，itemTitle的值是："+xianluname_str+"itemContent的值是:"+xianlunum_str,
-//                        Toast.LENGTH_SHORT).show();
-//                LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
-//                view = inflater.inflate(R.layout.xianlupopup, null);
-//
-//                final TextView pop_chehao = (EditText)view.findViewById(R.id.pop_chehao);
-//                final TextView pop_chexiang = (EditText)view.findViewById(R.id.pop_chexiang);
-//
-//                AlertDialog.Builder ad =new AlertDialog.Builder(xianlu_main_activity.this);
-//                ad.setView(view);
-//                ad.setTitle("检查信息");
-//                selfdialog =ad.create();
-//                selfdialog.setButton("确定", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        //获取输入框的用户名密码
-//
-//                        chehao = pop_chehao.getText().toString();
-//                        chexiang = pop_chexiang.getText().toString();
-//
-//                        if(chehao.equals("")||chexiang.equals("")){
-//                            showDialog();
-//                        }
-//                        else {
-//                            Intent intent = new Intent(xianlu_main_activity.this,crm_main_activity.class);
-//
-//                            Bundle bundle = new Bundle();
-//                            bundle.putString("zaizhuangxianlu",xianluname_str);
-//                            bundle.putString("zaizhuangxianlu_num",xianlunum_str);
-//                            bundle.putString("chehao",chehao+"0"+chexiang);
-//                            bundle.putString("chexiang",chexiang);
-//
-//                            if(chexiang.equals("1")||chexiang.equals("6"))
-//                            {
-//                                bundle.putString("chexing", "tc");
-////                            intent.putExtra("extra", "tc");
-//                            }
-//                            else if(chexiang.equals("2")||chexiang.equals("5"))
-//                            {
-//                                bundle.putString("chexing", "mp");
-////                            intent.putExtra("extra", "mp");
-//                            }
-//                            else if(chexiang.equals("3")||chexiang.equals("4"))
-//                            {
-//                                bundle.putString("chexing", "m");
-////                            intent.putExtra("extra", "m");
-//                            }
-////                        Toast.makeText(xianlu_main_activity.this,xianluname_str+"+"+xianlunum_str+"+"+chehao,Toast.LENGTH_LONG).show();
-//                            intent.putExtras(bundle);
-//                            startActivity(intent);
-//                            dialog.cancel();
-//                            finish();
-//                        }
-//                    }
-//                });
-//                selfdialog.setButton2("取消", new DialogInterface.OnClickListener() {
-//
-//                    @Override
-//                    public void onClick(DialogInterface dialog, int which) {
-//                        selfdialog.cancel();
-//                    }
-//                });
-//                selfdialog.show();
-//
-//            }
-//        });
         txt_xianlu_home = (TextView) findViewById(R.id.txt_xianlu_home);
         txt_xianlu_back = (TextView) findViewById(R.id.txt_xianlu_back);
         txt_xianlu_home.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +137,6 @@ private Button btn;
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-//                            txt.setText(listview_text_1.getList_result().get(2).toString());
 
 //                            ((ImageView)MainActivity.this.findViewById(R.id.imageview)).setImageBitmap(bm);
 //                            ((ImageView)MainActivity.this.findViewById(R.id.imageview1)).setImageBitmap(bm);
@@ -253,16 +151,6 @@ private Button btn;
                                     R.layout.xianlu_main_pic_tittle, fruitList);
                             ListView listView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
                             listView.setAdapter(adapter);
-
-//                            listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                                @Override
-//                                public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-//
-//                                    Fruit fruit = fruitList.get(position);
-//                                    Toast.makeText(xianlu_main_activity.this, fruit.getName(),Toast.LENGTH_SHORT).show();
-//                                }
-//                            });
-
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -310,19 +198,15 @@ private Button btn;
                                                 if(chexiang.equals("1")||chexiang.equals("6"))
                                                 {
                                                     bundle.putString("chexing", "tc");
-//                            intent.putExtra("extra", "tc");
                                                 }
                                                 else if(chexiang.equals("2")||chexiang.equals("5"))
                                                 {
                                                     bundle.putString("chexing", "mp");
-//                            intent.putExtra("extra", "mp");
                                                 }
                                                 else if(chexiang.equals("3")||chexiang.equals("4"))
                                                 {
                                                     bundle.putString("chexing", "m");
-//                            intent.putExtra("extra", "m");
                                                 }
-//                        Toast.makeText(xianlu_main_activity.this,xianluname_str+"+"+xianlunum_str+"+"+chehao,Toast.LENGTH_LONG).show();
                                                 intent.putExtras(bundle);
                                                 startActivity(intent);
                                                 dialog.cancel();

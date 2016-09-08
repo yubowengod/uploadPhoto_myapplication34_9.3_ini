@@ -1,10 +1,13 @@
 package com.arlen.photo.upload;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.arlen.photo.photopickup.presenter.PhotoPresenter;
 import com.arlen.photo.photopickup.util.MediaUtils;
@@ -61,6 +64,9 @@ public class test_mul {
 
 
     public  static void getImageromSdk( ArrayList<String> pic_path){
+
+
+
         Log.i("进入获取图片方法", "进入获取图片方法");
 
         String[] strArray=null;
