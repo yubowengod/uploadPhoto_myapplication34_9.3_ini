@@ -49,7 +49,7 @@ public class test_mul {
     private SoapObject result;
     private ListView listView;
     private MainActivity activity;
-    List<String> List_result;
+    static ArrayList<String> List_result=new ArrayList<>();
     String insetinfo_result;
 
 
@@ -142,7 +142,11 @@ public class test_mul {
                 SoapObject result = (SoapObject) envelope.bodyIn;
                 String resuly_back ;
                 resuly_back = result.getProperty(0).toString();//true
-//                 insetinfo_result;= resuly_back;
+
+
+
+
+
                 Log.i("进入端口方法", resuly_back);
             }
         } catch (SoapFault e) {

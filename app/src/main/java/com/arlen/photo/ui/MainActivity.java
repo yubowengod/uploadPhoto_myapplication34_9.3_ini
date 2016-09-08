@@ -77,20 +77,21 @@ public class MainActivity extends Activity implements View.OnClickListener {
             @Override
             public void onClick(View v) {
 //                判断pic_path内是否有重复的元素
-                flag_btn_upload++;
-                if(flag_btn_upload%2 == 1){
-                    for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
-                    {
-                        pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
-                    }
-                }
-                else if(flag_btn_upload%2 == 0){
+//                flag_btn_upload++;
+//                if(flag_btn_upload%2 == 1){
+//                    for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
+//                    {
+//                        pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
+//                    }
+//                }
+//                else if(flag_btn_upload%2 == 0){
                     pic_path.clear();
+
                     for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
                     {
                         pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
                     }
-                }
+//                }
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
