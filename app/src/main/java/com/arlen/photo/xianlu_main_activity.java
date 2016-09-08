@@ -8,6 +8,8 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -87,6 +89,12 @@ private Button btn;
 //    ???
 
     private List<xianlu_main_xianlu> xianlu_list = new ArrayList<xianlu_main_xianlu>();
+
+
+    private int MIN_MARK = 1;
+    private int MAX_MARK = 6;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
@@ -173,8 +181,71 @@ private Button btn;
 
                                     AlertDialog.Builder ad =new AlertDialog.Builder(xianlu_main_activity.this);
                                     ad.setView(view);
+
+                                    pop_chexiang.addTextChangedListener(new TextWatcher() {
+                                        @Override
+                                        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+                                            System.out.println("-1-beforeTextChanged-->"
+                                                    + pop_chexiang.getText().toString() + "<--");
+                                        }
+
+                                        @Override
+                                        public void onTextChanged(CharSequence s, int start, int before, int count) {
+//
+                                            System.out.println("-1-onTextChanged-->"
+                                                    + pop_chexiang.getText().toString() + "<--");
+
+                                        }
+
+                                        @Override
+                                        public void afterTextChanged(Editable s) {
+                                            if (s != null && !s.equals(""))
+                                            {
+                                                if (MIN_MARK != -1 && MAX_MARK != -1)
+                                                {
+                                                    int markVal = 0;
+                                                    try
+                                                    {
+                                                        markVal = Integer.parseInt(s.toString());
+                                                    }
+                                                    catch (NumberFormatException e)
+                                                    {
+                                                        markVal = 0;
+                                                    }
+                                                    if (markVal > MAX_MARK)
+                                                    {
+                                                        Toast.makeText(getBaseContext(), "最大值为6", Toast.LENGTH_SHORT).show();
+                                                        pop_chexiang.setText(String.valueOf(MAX_MARK));
+                                                    }
+                                                    if (s.length() > 0)
+                                            {
+                                                if (MIN_MARK != -1 && MAX_MARK != -1)
+                                                {
+                                                    int num = Integer.parseInt(s.toString());
+                                                    if (num > MAX_MARK)
+                                                    {
+
+                                                        pop_chexiang.setText(String.valueOf(MAX_MARK));
+                                                    }
+                                                    else if(num < MIN_MARK)
+                                                        pop_chexiang.setText(String.valueOf(MIN_MARK));
+                                                    return;
+                                                }
+                                            }
+
+                                                    return;
+                                                }
+                                            }
+
+                                        }
+                                    });
+
                                     ad.setTitle("检查信息");
                                     selfdialog =ad.create();
+
+
+
                                     selfdialog.setButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
@@ -236,6 +307,12 @@ private Button btn;
         });
 
     }
+
+//    private TextWatcher textWatcher = new TextWatcher
+
+
+
+
 
     private void showDialog(){
         AlertDialog dialog;

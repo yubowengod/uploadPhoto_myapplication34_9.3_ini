@@ -72,24 +72,6 @@ public class test_mul {
         String[] strArray=null;
 
         try{
-            String srcUrl = "/storage/sdcard0/"; //路径
-
-//            mPhotoPresenter1.mSelectedImgPros.get(0).fullPath.toString();
-//
-//            String fileName1 = "qwe.png";  //文件名
-//            String fileName2 = "qwer.png";//文件名
-//            String fileName3 = "qwert.png";
-//            String fileName4 = "qwerty.png";
-//            String fileName5 = "qwertyu.png";
-//
-//            List<String>imageList=new ArrayList<>();//定义一个list，里面装2个图片地址，模拟批量上传
-//            imageList.add(fileName1);
-//            imageList.add(fileName2);
-//            imageList.add(fileName3);
-//            imageList.add(fileName4);
-//            imageList.add(fileName5);
-//            imageList.add(fileName5);
-//            imageList.add(fileName5);
 
 
             for (int i = 0; i < pic_path.size(); i++) {
@@ -142,11 +124,6 @@ public class test_mul {
                 SoapObject result = (SoapObject) envelope.bodyIn;
                 String resuly_back ;
                 resuly_back = result.getProperty(0).toString();//true
-
-
-
-
-
                 Log.i("进入端口方法", resuly_back);
             }
         } catch (SoapFault e) {

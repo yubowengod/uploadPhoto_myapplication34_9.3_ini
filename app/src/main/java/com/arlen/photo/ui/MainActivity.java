@@ -76,16 +76,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btn_pic_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                pic_path.clear();
 
-                    pic_path.clear();
-
-                    for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
-                    {
-                        pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
-                    }
-
-
-
+                for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
+                {
+                    pic_path.add(mPhotoPresenter.mSelectedImgPros.get(i).fullPath.toString());
+                }
                 executorService.execute(new Runnable() {
                     @Override
                     public void run() {
