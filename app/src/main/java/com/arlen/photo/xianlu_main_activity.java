@@ -2,7 +2,6 @@ package com.arlen.photo;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,30 +10,23 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.arlen.photo.ImageCachceUitl_package.ImageCachceUitl;
-import com.arlen.photo.xianlu.Fruit;
-import com.arlen.photo.xianlu.FruitAdapter;
-import com.arlen.photo.xianlu.listview_text;
-import com.arlen.photo.xianlu.test_mul;
+import com.arlen.photo.upload.Data_up;
 import com.arlen.photo.xianlu.xianlu_oracle;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -67,46 +59,19 @@ public class xianlu_main_activity extends Activity {
                 default:
                     break;
             }
-        }
-
-        ;
+        }        ;
     };
-
+    private ExecutorService executorService;
 ////////////////////////////9-9
 
     private TextView txt_xianlu_home;
     private TextView txt_xianlu_back;
     private String xianluname_str;
     private String xianlunum_str;
-//????????????????????????
-
-    private Button button1;
     private String chehao;
     private String chexiang;
     private AlertDialog selfdialog;
-//????????????????????
-
-    //    ???
-    private List<Fruit> fruitList = new ArrayList<Fruit>();
-    private ExecutorService executorService;
-    private Button btn;
-    private ImageView imageView1, imageView2;
-    Bitmap bm;
-    ArrayList<Bitmap> bm_array = new ArrayList<Bitmap>();
-
-
-    private TextView textView;
-    public Handler handler;
-    public String result;
-    public String result_insetinfo;
-
-    private test_mul test_mul_1;
-    private listview_text listview_text_1;
-
-    private List<String> main_List_result;
-
     private Handler mainHandler = new Handler() {
-
         @Override
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
@@ -116,14 +81,7 @@ public class xianlu_main_activity extends Activity {
                 ((ImageView) xianlu_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
             }
         }
-
-
     };
-//    ???
-
-    private List<xianlu_main_xianlu> xianlu_list = new ArrayList<xianlu_main_xianlu>();
-
-
     private int MIN_MARK = 1;
     private int MAX_MARK = 6;
 
@@ -139,30 +97,7 @@ public class xianlu_main_activity extends Activity {
 
         urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
         urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
 
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-
-
-//        handler = new Handler();
         executorService = Executors.newFixedThreadPool(5);
         listview_download();
         txt_xianlu_home = (TextView) findViewById(R.id.txt_xianlu_home);
@@ -183,12 +118,7 @@ public class xianlu_main_activity extends Activity {
                 finish();
             }
         });
-
-
-
-
     }
-
 
     private void listview_download() {
         executorService.submit(new Runnable() {
@@ -200,10 +130,9 @@ public class xianlu_main_activity extends Activity {
                 listview_xianlu_oracle.getList_result().size();
 
                 for (int i = 0; i < listview_xianlu_oracle.getList_result().size(); i++) {
-                    urlList.add(listview_xianlu_oracle.getList_result().get(i).toString());
+//                    urlList.add(listview_xianlu_oracle.getList_result().get(i).toString());
+                    urlList.add(Data_up.getSERVICE_URL_IP_PORT_webnnn()+listview_xianlu_oracle.getList_result().get(i).toString()+".jpg");
                 }
-
-
 
                 try {
                     mainHandler.post(new Runnable() {
@@ -266,37 +195,28 @@ public class xianlu_main_activity extends Activity {
                                                             return;
                                                         }
                                                     }
-
                                                     return;
                                                 }
                                             }
-
                                         }
                                     });
 
                                     ad.setTitle("检查信息");
                                     selfdialog = ad.create();
-
-
                                     selfdialog.setButton("确定", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            //获取输入框的用户名密码
-
                                             chehao = pop_chehao.getText().toString();
                                             chexiang = pop_chexiang.getText().toString();
-
                                             if (chehao.equals("") || chexiang.equals("")) {
                                                 showDialog();
                                             } else {
                                                 Intent intent = new Intent(xianlu_main_activity.this, crm_main_activity.class);
-
                                                 Bundle bundle = new Bundle();
                                                 bundle.putString("zaizhuangxianlu", xianluname_str);
                                                 bundle.putString("zaizhuangxianlu_num", xianlunum_str);
                                                 bundle.putString("chehao", chehao + "0" + chexiang);
                                                 bundle.putString("chexiang", chexiang);
-
                                                 if (chexiang.equals("1") || chexiang.equals("6")) {
                                                     bundle.putString("chexing", "tc");
                                                 } else if (chexiang.equals("2") || chexiang.equals("5")) {
@@ -311,20 +231,14 @@ public class xianlu_main_activity extends Activity {
                                         }
                                     });
                                     selfdialog.setButton2("取消", new DialogInterface.OnClickListener() {
-
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
                                             selfdialog.cancel();
                                         }
                                     });
                                     selfdialog.show();
-
                                 }
                             });
-
-
-
-
                         }
                     });
                 } catch (Exception e) {
@@ -342,7 +256,6 @@ public class xianlu_main_activity extends Activity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
-
             }
         });
         dialog = builder.create();
@@ -377,7 +290,6 @@ public class xianlu_main_activity extends Activity {
         public View getView(final int position, View convertView, ViewGroup parent) {
             layoutInflater=LayoutInflater.from(getApplication());
             convertView = layoutInflater.inflate(R.layout.my_image_view, null);
-
             list_imag=(ImageView) convertView.findViewById(R.id.list_imag);
             xianlu_my_image_item_textview=(TextView) convertView.findViewById(R.id.xianlu_my_image_item_textview);
             list_imag.setTag(position);
