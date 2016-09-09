@@ -1,4 +1,5 @@
 package com.arlen.photo;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -10,10 +11,13 @@ import android.os.Handler;
 import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,10 +26,12 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.photo.ImageCachceUitl_package.ImageCachceUitl;
 import com.arlen.photo.xianlu.Fruit;
 import com.arlen.photo.xianlu.FruitAdapter;
 import com.arlen.photo.xianlu.listview_text;
 import com.arlen.photo.xianlu.test_mul;
+import com.arlen.photo.xianlu.xianlu_oracle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +45,34 @@ import java.util.concurrent.Executors;
 public class xianlu_main_activity extends Activity {
 
 
+    ////////////////////////////9-9
+    private xianlu_oracle listview_xianlu_oracle;
+    private ImageCachceUitl imageCachceUitl;
+    private List<String> urlList = new ArrayList<String>();
+    private ListView listView;
+    private Handler handler1 = new Handler() {
+        public void handleMessage(android.os.Message msg) {
+            switch (msg.what) {
+                case ImageCachceUitl.SUCCSEE:
+                    Bitmap bitmap = (Bitmap) msg.obj;
+                    int psition = msg.arg1;
+                    //通过TAg加载当前的limageview
+                    ImageView imageView = (ImageView) listView.findViewWithTag(psition);
+                    if (null != bitmap && null != imageView) {
+                        imageView.setImageBitmap(bitmap);
+                    }
+                    break;
+                case ImageCachceUitl.FAIL:
+                    Toast.makeText(getApplicationContext(), "下载错误", Toast.LENGTH_LONG).show();
+                default:
+                    break;
+            }
+        }
+
+        ;
+    };
+
+////////////////////////////9-9
 
     private TextView txt_xianlu_home;
     private TextView txt_xianlu_back;
@@ -52,14 +86,13 @@ public class xianlu_main_activity extends Activity {
     private AlertDialog selfdialog;
 //????????????????????
 
-//    ???
-private List<Fruit> fruitList = new ArrayList<Fruit>();
-private ExecutorService executorService;
-private Button btn;
-    private ImageView imageView1,imageView2;
+    //    ???
+    private List<Fruit> fruitList = new ArrayList<Fruit>();
+    private ExecutorService executorService;
+    private Button btn;
+    private ImageView imageView1, imageView2;
     Bitmap bm;
     ArrayList<Bitmap> bm_array = new ArrayList<Bitmap>();
-
 
 
     private TextView textView;
@@ -72,15 +105,15 @@ private Button btn;
 
     private List<String> main_List_result;
 
-    private Handler mainHandler = new Handler(){
+    private Handler mainHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
             // TODO Auto-generated method stub
             super.handleMessage(msg);
-            if(msg.what == 2012){
+            if (msg.what == 2012) {
                 //只要在主线程就可以处理ui
-                ((ImageView)xianlu_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
+                ((ImageView) xianlu_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
             }
         }
 
@@ -100,7 +133,36 @@ private Button btn;
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
         setContentView(R.layout.xianlu_main);
-        handler = new Handler();
+
+        listView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
+        imageCachceUitl = new ImageCachceUitl(getApplicationContext(), handler1);
+
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+
+
+//        handler = new Handler();
         executorService = Executors.newFixedThreadPool(5);
         listview_download();
         txt_xianlu_home = (TextView) findViewById(R.id.txt_xianlu_home);
@@ -124,62 +186,43 @@ private Button btn;
 
 
 
+
     }
 
 
-    private void listview_download(){
+    private void listview_download() {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
 
-                listview_text_1.getImageromSdk();
+                listview_xianlu_oracle.getImageromSdk();
 
-                for(int i = 0;i<listview_text_1.getList_result().size();i++)
-                {
-                    test_mul_1.getImageromSdk(listview_text_1.getList_result().get(i).toString());
+                listview_xianlu_oracle.getList_result().size();
 
-                    bm_array.add(test_mul_1.onDecodeClicked(test_mul_1.List_result));
+                for (int i = 0; i < listview_xianlu_oracle.getList_result().size(); i++) {
+                    urlList.add(listview_xianlu_oracle.getList_result().get(i).toString());
                 }
+
+
 
                 try {
                     mainHandler.post(new Runnable() {
                         @Override
                         public void run() {
-
-//                            ((ImageView)MainActivity.this.findViewById(R.id.imageview)).setImageBitmap(bm);
-//                            ((ImageView)MainActivity.this.findViewById(R.id.imageview1)).setImageBitmap(bm);
-
-                            ArrayList<Fruit> fruit_array = new ArrayList<Fruit>();
-
-                            for(int i = 0;i<listview_text_1.getList_result().size();i++){
-                                fruit_array.add(new Fruit(listview_text_1.getList_result().get(i).toString(),bm_array.get(i)));
-                                fruitList.add(fruit_array.get(i));
-                            }
-                            FruitAdapter adapter = new FruitAdapter(xianlu_main_activity.this,
-                                    R.layout.xianlu_main_pic_tittle, fruitList);
-                            ListView listView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
-                            listView.setAdapter(adapter);
+                            listView.setAdapter(new myListAdapt());
                             listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//                                    HashMap<String,String> map = (HashMap<String,String>) myListView.getItemAtPosition(position);
-//                                    xianluname_str = map.get("xianlu_name");
-//                                    xianlunum_str = map.get("xianlu_num");
-//                                    Toast.makeText(getApplicationContext(),
-//                                            "你选择了第"+position+"个Item，itemTitle的值是："+xianluname_str+"itemContent的值是:"+xianlunum_str,
-//                                            Toast.LENGTH_SHORT).show();
-                                    Fruit fruit = fruitList.get(position);
-                                    Toast.makeText(xianlu_main_activity.this, fruit.getName(),Toast.LENGTH_SHORT).show();
-                                    xianluname_str = fruit.getName().toString();
+                                    xianluname_str = urlList.get(position).toString();
 
                                     LayoutInflater inflater = (LayoutInflater) getApplicationContext().getSystemService(LAYOUT_INFLATER_SERVICE);
                                     view = inflater.inflate(R.layout.xianlupopup, null);
 
-                                    final TextView pop_chehao = (EditText)view.findViewById(R.id.pop_chehao);
-                                    final TextView pop_chexiang = (EditText)view.findViewById(R.id.pop_chexiang);
+                                    final TextView pop_chehao = (EditText) view.findViewById(R.id.pop_chehao);
+                                    final TextView pop_chexiang = (EditText) view.findViewById(R.id.pop_chexiang);
 
-                                    AlertDialog.Builder ad =new AlertDialog.Builder(xianlu_main_activity.this);
+                                    AlertDialog.Builder ad = new AlertDialog.Builder(xianlu_main_activity.this);
                                     ad.setView(view);
 
                                     pop_chexiang.addTextChangedListener(new TextWatcher() {
@@ -200,39 +243,29 @@ private Button btn;
 
                                         @Override
                                         public void afterTextChanged(Editable s) {
-                                            if (s != null && !s.equals(""))
-                                            {
-                                                if (MIN_MARK != -1 && MAX_MARK != -1)
-                                                {
+                                            if (s != null && !s.equals("")) {
+                                                if (MIN_MARK != -1 && MAX_MARK != -1) {
                                                     int markVal = 0;
-                                                    try
-                                                    {
+                                                    try {
                                                         markVal = Integer.parseInt(s.toString());
-                                                    }
-                                                    catch (NumberFormatException e)
-                                                    {
+                                                    } catch (NumberFormatException e) {
                                                         markVal = 0;
                                                     }
-                                                    if (markVal > MAX_MARK)
-                                                    {
+                                                    if (markVal > MAX_MARK) {
                                                         Toast.makeText(getBaseContext(), "最大值为6", Toast.LENGTH_SHORT).show();
                                                         pop_chexiang.setText(String.valueOf(MAX_MARK));
                                                     }
-                                                    if (s.length() > 0)
-                                            {
-                                                if (MIN_MARK != -1 && MAX_MARK != -1)
-                                                {
-                                                    int num = Integer.parseInt(s.toString());
-                                                    if (num > MAX_MARK)
-                                                    {
+                                                    if (s.length() > 0) {
+                                                        if (MIN_MARK != -1 && MAX_MARK != -1) {
+                                                            int num = Integer.parseInt(s.toString());
+                                                            if (num > MAX_MARK) {
 
-                                                        pop_chexiang.setText(String.valueOf(MAX_MARK));
+                                                                pop_chexiang.setText(String.valueOf(MAX_MARK));
+                                                            } else if (num < MIN_MARK)
+                                                                pop_chexiang.setText(String.valueOf(MIN_MARK));
+                                                            return;
+                                                        }
                                                     }
-                                                    else if(num < MIN_MARK)
-                                                        pop_chexiang.setText(String.valueOf(MIN_MARK));
-                                                    return;
-                                                }
-                                            }
 
                                                     return;
                                                 }
@@ -242,8 +275,7 @@ private Button btn;
                                     });
 
                                     ad.setTitle("检查信息");
-                                    selfdialog =ad.create();
-
+                                    selfdialog = ad.create();
 
 
                                     selfdialog.setButton("确定", new DialogInterface.OnClickListener() {
@@ -254,28 +286,22 @@ private Button btn;
                                             chehao = pop_chehao.getText().toString();
                                             chexiang = pop_chexiang.getText().toString();
 
-                                            if(chehao.equals("")||chexiang.equals("")){
+                                            if (chehao.equals("") || chexiang.equals("")) {
                                                 showDialog();
-                                            }
-                                            else {
-                                                Intent intent = new Intent(xianlu_main_activity.this,crm_main_activity.class);
+                                            } else {
+                                                Intent intent = new Intent(xianlu_main_activity.this, crm_main_activity.class);
 
                                                 Bundle bundle = new Bundle();
-                                                bundle.putString("zaizhuangxianlu",xianluname_str);
-                                                bundle.putString("zaizhuangxianlu_num",xianlunum_str);
-                                                bundle.putString("chehao",chehao+"0"+chexiang);
-                                                bundle.putString("chexiang",chexiang);
+                                                bundle.putString("zaizhuangxianlu", xianluname_str);
+                                                bundle.putString("zaizhuangxianlu_num", xianlunum_str);
+                                                bundle.putString("chehao", chehao + "0" + chexiang);
+                                                bundle.putString("chexiang", chexiang);
 
-                                                if(chexiang.equals("1")||chexiang.equals("6"))
-                                                {
+                                                if (chexiang.equals("1") || chexiang.equals("6")) {
                                                     bundle.putString("chexing", "tc");
-                                                }
-                                                else if(chexiang.equals("2")||chexiang.equals("5"))
-                                                {
+                                                } else if (chexiang.equals("2") || chexiang.equals("5")) {
                                                     bundle.putString("chexing", "mp");
-                                                }
-                                                else if(chexiang.equals("3")||chexiang.equals("4"))
-                                                {
+                                                } else if (chexiang.equals("3") || chexiang.equals("4")) {
                                                     bundle.putString("chexing", "m");
                                                 }
                                                 intent.putExtras(bundle);
@@ -296,30 +322,23 @@ private Button btn;
                                 }
                             });
 
+
+
+
                         }
                     });
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     throw new RuntimeException(e);
                 }
-
             }
         });
-
     }
-
-//    private TextWatcher textWatcher = new TextWatcher
-
-
-
-
-
-    private void showDialog(){
+    private void showDialog() {
         AlertDialog dialog;
         AlertDialog.Builder builder = new AlertDialog.Builder(xianlu_main_activity.this);
         builder.setTitle("错误").setIcon(android.R.drawable.stat_notify_error);
         builder.setMessage("请输入车号及车厢！！！");
-        builder.setPositiveButton("确定", new DialogInterface.OnClickListener(){
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // TODO Auto-generated method stub
@@ -328,5 +347,47 @@ private Button btn;
         });
         dialog = builder.create();
         dialog.show();
+    }
+
+    class myListAdapt extends BaseAdapter {
+        private LayoutInflater layoutInflater;
+        ImageView list_imag;
+        Button list_but;
+        TextView xianlu_my_image_item_textview;
+        @Override
+        public int getCount() {
+            // TODO Auto-generated method stub
+            return urlList.size();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            // TODO Auto-generated method stub
+            return urlList.get(position);
+        }
+
+        @Override
+        public long getItemId(int position) {
+            // TODO Auto-generated method stub
+            return position;
+        }
+
+        @SuppressLint({ "InflateParams", "ViewHolder" })
+        @Override
+        public View getView(final int position, View convertView, ViewGroup parent) {
+            layoutInflater=LayoutInflater.from(getApplication());
+            convertView = layoutInflater.inflate(R.layout.my_image_view, null);
+
+            list_imag=(ImageView) convertView.findViewById(R.id.list_imag);
+            xianlu_my_image_item_textview=(TextView) convertView.findViewById(R.id.xianlu_my_image_item_textview);
+            list_imag.setTag(position);
+            final Bitmap bitmap=imageCachceUitl.getBitmapFromUrl(urlList.get(position), position);
+            if (null!=bitmap) {
+                list_imag.setImageBitmap(bitmap);
+            }
+            list_imag.setVisibility(View.VISIBLE);
+            xianlu_my_image_item_textview.setText(urlList.get(position).toString());
+            return convertView;
+        }
     }
 }
