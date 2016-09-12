@@ -7,8 +7,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.photo.R;
 import com.arlen.photo.photopickup.presenter.PhotoPresenter;
 import com.arlen.photo.photopickup.util.MediaUtils;
 import com.arlen.photo.ui.MainActivity;
@@ -20,6 +22,7 @@ import org.ksoap2.serialization.MarshalBase64;
 import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.ByteArrayOutputStream;
@@ -48,7 +51,7 @@ public class test_mul {
     private String methodName = "FileUploadImage ";   //设置方法名  FileUploadImage
     private SoapObject result;
     private ListView listView;
-    private MainActivity activity;
+    private static MainActivity activity;
     static ArrayList<String> List_result=new ArrayList<>();
     String insetinfo_result;
 
@@ -59,9 +62,10 @@ public class test_mul {
     String Cnum=null;
     String FileUploadImage_str=null;
 
-    public static String return_true_flag;
-
+//    public static String return_true_flag;
+    public static ArrayList<String> return_true_flag = new ArrayList<>();
     public static PhotoPresenter mPhotoPresenter1;
+
 
 
     public  static void getImageromSdk( ArrayList<String> pic_path){
@@ -88,6 +92,8 @@ public class test_mul {
                 String uploadBuffer = new String(Base64.encode(baos.toByteArray()));
                 String methodName = "FileUploadImage";
                 getImageFromAndroid(methodName,pic_path.get(i), uploadBuffer);   //调用webservice
+
+
                 Log.i("connectWebService", "start");
                 fis.close();
 //                System.gc();
@@ -125,7 +131,7 @@ public class test_mul {
                 SoapObject result = (SoapObject) envelope.bodyIn;
                 String resuly_back ;
                 resuly_back = result.getProperty(0).toString();//true
-                return_true_flag = return_true_flag+"+"+resuly_back;
+                return_true_flag.add(resuly_back);
                 Log.i("进入端口方法", resuly_back);
             }
         } catch (SoapFault e) {

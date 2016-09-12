@@ -1,6 +1,7 @@
 package com.arlen.photo.ui;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -68,7 +69,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             if (msg.what == 2012) {
                 //只要在主线程就可以处理ui
                 ((TextView) MainActivity.this.findViewById(msg.arg1)).setText((String) msg.obj);
-
             }
         }
     };
@@ -87,12 +87,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         pic_info = (TextView) findViewById(R.id.pic_info);
 
-        pb_progressbar = (ProgressBar) findViewById(R.id.pb_progressbar);
-
         btn_pic_info.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pic_path.clear();
+
+                final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "图片上传中", "请稍候...", true);
 
                 for (int i = 0 ; i<mPhotoPresenter.mSelectedImgPros.size(); i++)
                 {
@@ -107,26 +107,20 @@ public class MainActivity extends Activity implements View.OnClickListener {
                             mainHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    pic_info.setText(test_mul.return_true_flag);
+                                    if (test_mul.return_true_flag.size()==pic_path.size())
+                                    {
+                                        dialog.dismiss();
+                                        pic_info.setText("上传图片完成，一共"+ String.valueOf( pic_path.size())+"张图片");
+                                        test_mul.return_true_flag.clear();
+                                    }
                                 }
                             });
                         }
                         catch (Exception e) {
                             throw new RuntimeException(e);
                         }
-
-
-
-
-
-
-
-
-
-                }
+                    }
                 });
-
-
             }
         });
 
