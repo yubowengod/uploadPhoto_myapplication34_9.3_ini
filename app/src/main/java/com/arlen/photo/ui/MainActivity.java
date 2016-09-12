@@ -5,12 +5,14 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,6 +36,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
     private Button btn_pic_info;
+    private Button btn_pic_info1;
 
     private TextView pic_info;
 
@@ -56,6 +59,19 @@ public class MainActivity extends Activity implements View.OnClickListener {
     private int flag_btn_upload = 0;
 
 
+
+    private Handler mainHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            if (msg.what == 2012) {
+                //只要在主线程就可以处理ui
+                ((TextView) MainActivity.this.findViewById(msg.arg1)).setText((String) msg.obj);
+
+            }
+        }
+    };
 
 
     @Override
@@ -86,7 +102,28 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     @Override
                     public void run() {
                         test_mul.getImageromSdk(pic_path);
-                    }
+                        try
+                        {
+                            mainHandler.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    pic_info.setText(test_mul.return_true_flag);
+                                }
+                            });
+                        }
+                        catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+
+
+
+
+
+
+
+                }
                 });
 
 

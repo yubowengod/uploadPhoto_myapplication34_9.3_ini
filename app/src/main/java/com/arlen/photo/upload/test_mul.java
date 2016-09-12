@@ -59,6 +59,7 @@ public class test_mul {
     String Cnum=null;
     String FileUploadImage_str=null;
 
+    public static String return_true_flag;
 
     public static PhotoPresenter mPhotoPresenter1;
 
@@ -124,6 +125,7 @@ public class test_mul {
                 SoapObject result = (SoapObject) envelope.bodyIn;
                 String resuly_back ;
                 resuly_back = result.getProperty(0).toString();//true
+                return_true_flag = return_true_flag+"+"+resuly_back;
                 Log.i("进入端口方法", resuly_back);
             }
         } catch (SoapFault e) {

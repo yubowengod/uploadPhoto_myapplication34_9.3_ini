@@ -14,7 +14,7 @@ public class Data_up {
         return SERVICE_URL_IP_PORT_webnnn;
     }
 
-    private static String SERVICE_URL = "http://192.168.1.117:8011/Service1.asmx";
+    private static String SERVICE_URL = "http://192.168.1.111:8011/Service1.asmx";
 
 //  private static String SERVICE_URL = "http://10.148.82.232:8011/Service1.asmx";
 
