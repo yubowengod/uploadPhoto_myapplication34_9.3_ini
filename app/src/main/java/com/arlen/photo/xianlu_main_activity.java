@@ -95,8 +95,8 @@ public class xianlu_main_activity extends Activity {
         listView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
         imageCachceUitl = new ImageCachceUitl(getApplicationContext(), handler1);
 
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+//        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+//        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
 
         executorService = Executors.newFixedThreadPool(5);
         listview_download();

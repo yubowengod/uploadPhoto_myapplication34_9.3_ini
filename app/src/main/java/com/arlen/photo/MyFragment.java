@@ -63,14 +63,7 @@ public class MyFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-//        Button button = (Button) getActivity().findViewById(R.id.button);
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView textView = (TextView) getActivity().findViewById(R.id.fragment1_text);
-//                Toast.makeText(getActivity(), textView.getText(), Toast.LENGTH_LONG).show();
-//            }
-//        });
+
 
         GridView gridview = (GridView) getActivity().findViewById(R.id.gridview);
         int length = imageRes.length;

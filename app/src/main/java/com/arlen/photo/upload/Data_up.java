@@ -6,17 +6,17 @@ package com.arlen.photo.upload;
 public class Data_up {
 //    private static String a ="feiyangxiaomi";
 
+//    private static String SERVICE_URL_IP_PORT_webnnn = "http://192.168.1.110:8011/webnnn/";
 
-
-    private static String SERVICE_URL_IP_PORT_webnnn = "http://192.168.1.117:8011/webnnn/";
+    private static String SERVICE_URL_IP_PORT_webnnn = "http://192.168.155.1:8011/webnnn/";
 
     public static String getSERVICE_URL_IP_PORT_webnnn() {
         return SERVICE_URL_IP_PORT_webnnn;
     }
 
-    private static String SERVICE_URL = "http://192.168.1.111:8011/Service1.asmx";
+//    private static String SERVICE_URL = "http://192.168.1.110:8011/Service1.asmx";
 
-//  private static String SERVICE_URL = "http://10.148.82.232:8011/Service1.asmx";
+    private static String SERVICE_URL = "http://192.168.155.1:8011/Service1.asmx";
 
     public static String getSERVICE_URL() {
         return SERVICE_URL;
@@ -31,6 +31,5 @@ public class Data_up {
     public static String getSERVICE_NAMESPACE() {
         return SERVICE_NAMESPACE;
     }
-
 
 }

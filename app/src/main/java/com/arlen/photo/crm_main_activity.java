@@ -6,7 +6,10 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -19,13 +22,23 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.photo.SpinnerAdapter.select_spinner_xiangdian;
+import com.arlen.photo.SpinnerAdapter.spinner_gongwei_oracle;
+import com.arlen.photo.SpinnerAdapter.spinner_gongxu_oracle;
 import com.arlen.photo.ui.MainActivity;
+import com.arlen.photo.upload.Data_up;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by God on 2016/8/19.
@@ -89,6 +102,7 @@ public class crm_main_activity extends Activity {
     private Spinner citySpinner = null;     //地级市
     private Spinner countySpinner = null;    //县级（区、县、县级市）
     ArrayAdapter<String> provinceAdapter = null;  //省级适配器
+    ArrayAdapter<String> gongweiAdapter = null;  //省级适配器
     ArrayAdapter<String> cityAdapter = null;    //地级适配器
     ArrayAdapter<String> countyAdapter = null;    //县级适配器
         static int provincePosition = 3;
@@ -224,7 +238,7 @@ public class crm_main_activity extends Activity {
     private TextView text_chexing;
     private TextView text_chehao;
     private TextView text_zaizhuangxianlu;
-    private TextView text_zaizhuangxianlu_num;
+//    private TextView text_zaizhuangxianlu_num;
 
     String str;
     String chetileibie;
@@ -239,11 +253,116 @@ public class crm_main_activity extends Activity {
         txt_crm_next.setSelected(false);
     }
 
+
+    private ExecutorService executorService;
+    private List<String> urlList = new ArrayList<String>();
+    private String [] gongwei = null;
+    private String [] [] gongxu = new String[50][50];
+    private String [] [] [] xiangdian = new String[50][50][50];
+
+    private Handler mainHandler_sp_gw = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            // TODO Auto-generated method stub
+            super.handleMessage(msg);
+            if (msg.what == 2221) {
+                //只要在主线程就可以处理ui
+                ((ImageView) crm_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
+            }
+        }
+    };
+
+
+    private void ini_spinner(){
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+
+                spinner_gongwei_oracle.getImageromSdk();
+
+                gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
+
+                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
+                {
+                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
+
+                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
+
+                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
+                    {
+                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
+
+                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
+
+                        for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
+                        {
+                            xiangdian[i][j][k] = select_spinner_xiangdian.getList_result().get(k);
+                        }
+                        select_spinner_xiangdian.getList_result().clear();
+
+                    }
+                    spinner_gongxu_oracle.getList_result().clear();
+
+                }
+
+
+
+//                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
+//                {
+//                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
+//
+//                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
+//                    {
+//                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
+//
+//                    }
+//
+//                    spinner_gongxu_oracle.getList_result().clear();
+//                }
+
+
+
+
+
+//                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
+//                {
+//                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
+//                    {
+//                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
+//
+//                        for (int n=0;n<select_spinner_xiangdian.getList_result().size();n++)
+//                        {
+//                            xiangdian[i][j][n] = select_spinner_xiangdian.getList_result().get(n);
+//                        }
+////                        select_spinner_xiangdian.getList_result().clear();
+//                    }
+//                }
+
+                mainHandler_sp_gw.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        setSpinner();
+                    }
+                });
+
+
+            }
+        });
+    }
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crm_main);
 //        Intent intent=getIntent();
 //        String stringValue=intent.getStringExtra("extra");
+
+        provinceSpinner = (Spinner)findViewById(R.id.spinner_gongwei);
+        citySpinner = (Spinner)findViewById(R.id.spinner_gongxu);
+        countySpinner = (Spinner)findViewById(R.id.spinner_xiangdian);
+
+        executorService = Executors.newFixedThreadPool(5);
+
+
 
         Bundle bundle = this.getIntent().getExtras();
 
@@ -257,15 +376,26 @@ public class crm_main_activity extends Activity {
         text_chehao = (TextView) findViewById(R.id.text_chehao);
         text_chexing = (TextView) findViewById(R.id.text_chexing);
         text_zaizhuangxianlu = (TextView) findViewById(R.id.crm_main_zaizhuangxianlu);
-        text_zaizhuangxianlu_num = (TextView) findViewById(R.id.crm_main_zaizhuangxianlu_num);
+//        text_zaizhuangxianlu_num = (TextView) findViewById(R.id.crm_main_zaizhuangxianlu_num);
         text_chehao.setText(xianlu_up_chehao);
         text_chexing.setText(xianlu_up_chexing);
-        text_zaizhuangxianlu.setText("线路："+xianlu_up_zaizhuangxianlu);
-        text_zaizhuangxianlu_num.setText(xianlu_up_zaizhuangxianlu_num);
+        text_zaizhuangxianlu.setText(xianlu_up_zaizhuangxianlu);
+//        text_zaizhuangxianlu_num.setText(xianlu_up_zaizhuangxianlu_num);
 
 
 
-        setSpinner();
+//        setSpinner();
+//        ini_spinner();
+
+        ini_spinner();
+
+        //省级下拉框监听
+
+
+
+
+
+
         sp_text = (TextView) findViewById(R.id.sp_text);
 
         txt_crm_home = (TextView) findViewById(R.id.txt_crm_home);
@@ -324,30 +454,23 @@ public class crm_main_activity extends Activity {
     */
     private void setSpinner()
     {
-        provinceSpinner = (Spinner)findViewById(R.id.spinner_gongwei);
-        citySpinner = (Spinner)findViewById(R.id.spinner_gongxu);
-        countySpinner = (Spinner)findViewById(R.id.spinner_xiangdian);
+
 
         //绑定适配器和值
-        SpinnerAdapter provinceAdapter1=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,province);
-        provinceAdapter = new ArrayAdapter<String>(crm_main_activity.this,android.R.layout.simple_spinner_item, province);
-        provinceSpinner.setAdapter(provinceAdapter1);
-        provinceSpinner.setSelection(0,true);  //设置默认选中项，此处为默认选中第4个值
+        SpinnerAdapter provinceAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,gongwei);
+        provinceSpinner.setAdapter(provinceAdapter);
+        provinceSpinner.setSelection(4,true);  //设置默认选中项，此处为默认选中第4个值
 
-        SpinnerAdapter cityAdapter1=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,city[0]);
-//        cityAdapter = new ArrayAdapter<String>(sanji_activity.this,
-//                android.R.layout.simple_spinner_item, city[3]);
-        citySpinner.setAdapter(cityAdapter1);
+        SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,gongxu[4]);
+        citySpinner.setAdapter(cityAdapter);
         citySpinner.setSelection(0,true);  //默认选中第0个
 
-        final SpinnerAdapter countyAdapter1=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,county[0][0]);
-//        countyAdapter = new ArrayAdapter<String>(sanji_activity.this,
-//                android.R.layout.simple_spinner_item, county[3][0]);
-        countySpinner.setAdapter(countyAdapter1);
+        final SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,xiangdian[4][1]);
+        countySpinner.setAdapter(countyAdapter);
         countySpinner.setSelection(0, true);
 
+//        bingo
 
-        //省级下拉框监听
         provinceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             // 表示选项被改变的时候触发此方法，主要实现办法：动态改变地级适配器的绑定值
@@ -357,9 +480,8 @@ public class crm_main_activity extends Activity {
                 //position为当前省级选中的值的序号
 
                 //将地级适配器的值改变为city[position]中的值
-                SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,city[position]);
-//                cityAdapter = new ArrayAdapter<String>(
-//                        sanji_activity.this, android.R.layout.simple_spinner_item, city[position]);
+                SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,
+                        gongxu[position]);
                 // 设置二级下拉列表的选项内容适配器
                 citySpinner.setAdapter(cityAdapter);
                 provincePosition = position;    //记录当前省级序号，留给下面修改县级适配器时用
@@ -377,16 +499,11 @@ public class crm_main_activity extends Activity {
         citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         {
             @Override
-            public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                       int position, long arg3)
+            public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
-                SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,county[provincePosition][position]);
-//                countyAdapter = new ArrayAdapter<String>(sanji_activity.this,
-//                        android.R.layout.simple_spinner_item, county[provincePosition][position]);
+                SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,
+                        xiangdian[provincePosition][position]);
                 countySpinner.setAdapter(countyAdapter);
-
-
-
             }
 
             @Override
@@ -396,7 +513,6 @@ public class crm_main_activity extends Activity {
             }
         });
 
-//        citySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
         countySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -408,7 +524,18 @@ public class crm_main_activity extends Activity {
 
             }
         });
+
+
     }
+
+
+
+
+
+
+
+
+
 
     //    Integer.parseInt(str);
     private void showDialogtc(){

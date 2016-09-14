@@ -16,12 +16,16 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.photo.SpinnerAdapter.spinner_gongwei_oracle;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 public class MainActivity_login extends Activity implements View.OnClickListener{
+
 
     //UI Object
     private TextView txt_topbar;
@@ -49,10 +53,15 @@ public class MainActivity_login extends Activity implements View.OnClickListener
     private FragmentManager fManager1 = null;
     private long exitTime = 0;
 
+    private ExecutorService executorService;
+    static int ww = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+
         fManager = getFragmentManager();
         bindViews();
         txt_channel.performClick();   //模拟一次点击，既进去后选择第一项
