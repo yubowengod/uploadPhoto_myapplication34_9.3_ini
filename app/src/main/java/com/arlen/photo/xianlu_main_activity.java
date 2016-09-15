@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.arlen.photo.ImageCachceUitl_package.ImageCachceUitl;
 import com.arlen.photo.upload.Data_up;
 import com.arlen.photo.xianlu.xianlu_oracle;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -294,6 +295,12 @@ public class xianlu_main_activity extends Activity {
             xianlu_my_image_item_textview=(TextView) convertView.findViewById(R.id.xianlu_my_image_item_textview);
             list_imag.setTag(position);
             final Bitmap bitmap=imageCachceUitl.getBitmapFromUrl(urlList.get(position), position);
+//
+//            Glide
+//                    .with(context)
+//                    .load(imageUrls[position])
+//                    .into((ImageView) convertView);
+
             if (null!=bitmap) {
                 list_imag.setImageBitmap(bitmap);
             }

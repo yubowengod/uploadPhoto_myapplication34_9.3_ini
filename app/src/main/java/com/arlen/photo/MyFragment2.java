@@ -187,12 +187,6 @@ public class MyFragment2 extends Fragment {
 
         ini_spinner();
 
-
-
-
-
-
-
         gridview = (GridView) getActivity().findViewById(R.id.gridview_fg_my);
 
         gridview.setAdapter(new MyFragment2_gridview_fg_my_ImageListAdapter(getActivity(),my_upload_pic));

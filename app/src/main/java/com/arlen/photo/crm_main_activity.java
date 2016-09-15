@@ -105,130 +105,7 @@ public class crm_main_activity extends Activity {
     ArrayAdapter<String> gongweiAdapter = null;  //省级适配器
     ArrayAdapter<String> cityAdapter = null;    //地级适配器
     ArrayAdapter<String> countyAdapter = null;    //县级适配器
-        static int provincePosition = 3;
-
-
-    //省级选项值
-    private String[] province = new String[] {"1工位",	"2工位",	"3工位",	"4工位"};
-
-//    private String[] province_m = new String[] {"1工位-m",	"2工位",	"3工位",	"4工位"};
-//    private String[] province_mp = new String[] {"1工位-mp",	"2工位",	"3工位",	"4工位"};
-//    private String[] province_tc = new String[] {"1工位-tc",	"2工位",	"3工位",	"4工位"};
-
-    //地级选项值
-    private String[][] city = new String[][]
-            {
-                    { "1工位1工序",	"1工位2工序",	"1工位3工序",	"1工位4工序",	"1工位5工序", 	"1工位6工序" },
-                    { "2工位1工序",	"2工位2工序",	"2工位3工序"  },
-                    { "3工位1工序",	"3工位2工序",	"3工位3工序",	"3工位4工序"  },
-                    { "4工位1工序",	"4工位2工序",	"4工位3工序",	"4工位4工序",	"4工位5工序"    }// ,"珠海","汕头","佛山","湛江","肇庆","江门","茂名","惠州","梅州","汕尾","河源","阳江","清远","东莞","中山","潮州","揭阳","云浮"
-            };
-    //县级选项值
-    private String[][][] county = new String[][][]
-            {
-                    {   //北京
-                            {"1工位1工序1项点",
-                                    "1工位1工序2项点",
-                                    "1工位1工序3项点",
-                                    "1工位1工序4项点",
-                                    "1工位1工序5项点",
-                                    "1工位1工序6项点",
-                                    "1工位1工序7项点",
-                                    "1工位1工序8项点",
-                                    "1工位1工序9项点",
-                                    "1工位1工序10项点",
-                                    "1工位1工序11项点",
-                                    "1工位1工序12项点",
-                                    "1工位1工序13项点"},
-
-                            {"1工位2工序1项点",
-                                    "1工位2工序2项点",
-                                    "1工位2工序3项点",
-                                    "1工位2工序4项点",
-                                    "1工位2工序5项点",
-                                    "1工位2工序6项点",
-                                    "1工位2工序7项点",
-                                    "1工位2工序8项点",
-                                    "1工位2工序9项点",
-                                    "1工位2工序10项点",
-                                    "1工位2工序11项点",
-                                    "1工位2工序12项点",
-                                    "1工位2工序13项点",
-                                    "1工位2工序14项点"
-                            },
-                            {"1工位3工序1项点",
-                                    "1工位3工序2项点",
-                                    "1工位3工序3项点",
-                                    "1工位3工序4项点",
-                                    "1工位3工序5项点",
-                                    "1工位3工序6项点",
-                                    "1工位3工序7项点",
-                                    "1工位3工序8项点",
-                                    "1工位3工序9项点",
-                                    "1工位3工序10项点",
-                                    "1工位3工序11项点",
-                                    "1工位3工序12项点",
-                                    "1工位3工序13项点",
-                                    "1工位3工序14项点",
-                                    "1工位3工序15项点",
-                                    "1工位3工序16项点"                        },
-                            {"1工位4工序1项点",
-                                    "1工位4工序2项点",
-                                    "1工位4工序3项点",
-                                    "1工位4工序4项点",
-                                    "1工位4工序5项点",
-                                    "1工位4工序6项点",
-                                    "1工位4工序7项点",
-                                    "1工位4工序8项点",
-                                    "1工位4工序9项点"
-                            },
-                            {"1工位5工序1项点",
-                                    "1工位5工序2项点",
-                                    "1工位5工序3项点",
-                                    "1工位5工序4项点",
-                                    "1工位5工序5项点",
-                                    "1工位5工序6项点",
-                                    "1工位5工序7项点",
-                                    "1工位5工序8项点",
-                                    "1工位5工序9项点",
-                                    "1工位5工序10项点",
-                                    "1工位5工序11项点",
-                                    "1工位5工序12项点"
-                            },
-                            {"1工位6工序1项点",
-                                    "1工位6工序2项点",
-                                    "1工位6工序3项点",
-                                    "1工位6工序4项点",
-                                    "1工位6工序5项点",
-                                    "1工位6工序6项点",
-                                    "1工位6工序7项点",
-                                    "1工位6工序8项点",
-                                    "1工位6工序9项点"
-                            }
-                    },
-                    {    //上海
-                            {"2工位1工序1项点",	"2工位1工序2项点",	"2工位1工序3项点",	"2工位1工序4项点",	"2工位1工序5项点",	"2工位1工序6项点"},
-                            {"2工位2工序1项点",	"2工位2工序2项点",	"2工位2工序3项点",	"2工位2工序4项点",	"2工位2工序5项点",	"2工位2工序6项点",	"2工位2工序7项点"},
-                            {"2工位3工序1项点",	"2工位3工序2项点",	"2工位3工序3项点",	"2工位3工序4项点",	"2工位3工序5项点",	"2工位3工序6项点",	"2工位3工序7项点",	"2工位3工序8项点",	"2工位3工序9项点",	"2工位3工序10项点"}
-
-
-                    },
-                    {    //天津
-                            {"无"},{"无"},{"无"},{"无"}
-                    },
-                    {    //广东
-                            {"4工位1工序1项点",	"4工位1工序2项点",	"4工位1工序3项点",	"4工位1工序4项点",	"4工位1工序5项点"},
-                            {"4工位2工序1项点",	"4工位2工序2项点",	"4工位2工序3项点",	"4工位2工序4项点",	"4工位2工序5项点",	"4工位2工序6项点"},
-                            {"4工位3工序1项点",	"4工位3工序2项点",	"4工位3工序3项点",	"4工位3工序4项点"},
-                            {"4工位4工序1项点",	"4工位4工序2项点",	"4工位4工序3项点",	"4工位4工序4项点",	"4工位4工序5项点",	"4工位4工序6项点",	"4工位4工序7项点",	"4工位4工序8项点"},
-                            {"4工位5工序1项点",	"4工位5工序2项点",	"4工位5工序3项点",	"4工位5工序4项点",	"4工位5工序5项点",	"4工位5工序6项点",	"4工位5工序7项点",	"4工位5工序8项点",	"4工位5工序9项点",	"4工位5工序10项点",	"4工位5工序11项点"}
-
-                    }
-            };
-
-
-
-
+    static int provincePosition = 3;
 
     private TextView txt_crm_home;
     private TextView txt_crm_reset_xianlu;
@@ -253,125 +130,84 @@ public class crm_main_activity extends Activity {
         txt_crm_next.setSelected(false);
     }
 
-
-    private ExecutorService executorService;
-    private List<String> urlList = new ArrayList<String>();
-    private String [] gongwei = null;
-    private String [] [] gongxu = new String[50][50];
-    private String [] [] [] xiangdian = new String[50][50][50];
-
-    private Handler mainHandler_sp_gw = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            super.handleMessage(msg);
-            if (msg.what == 2221) {
-                //只要在主线程就可以处理ui
-                ((ImageView) crm_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
-            }
-        }
-    };
-
-
-    private void ini_spinner(){
-        executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-
-                spinner_gongwei_oracle.getImageromSdk();
-
-                gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
-
-                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
-                {
-                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
-
-                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
-
-                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
-                    {
-                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
-
-                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
-
-                        for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
-                        {
-                            xiangdian[i][j][k] = select_spinner_xiangdian.getList_result().get(k);
-                        }
-                        select_spinner_xiangdian.getList_result().clear();
-
-                    }
-                    spinner_gongxu_oracle.getList_result().clear();
-
-                }
-
-
-
+    MainActivity_login mainActivity_login;
+//    private ExecutorService executorService;
+//    private List<String> urlList = new ArrayList<String>();
+//    private String [] gongwei = null;
+//    private String [] [] gongxu = new String[50][50];
+//    private String [] [] [] xiangdian = new String[50][50][50];
+//
+//    private Handler mainHandler_sp_gw = new Handler() {
+//        @Override
+//        public void handleMessage(Message msg) {
+//            // TODO Auto-generated method stub
+//            super.handleMessage(msg);
+//            if (msg.what == 2221) {
+//                //只要在主线程就可以处理ui
+//                ((ImageView) crm_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
+//            }
+//        }
+//    };
+//
+//    private void ini_spinner(){
+//
+//        executorService.submit(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//                spinner_gongwei_oracle.getImageromSdk();
+//
+//                gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
+//
 //                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
 //                {
+//                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
+//
 //                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
 //
 //                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
 //                    {
 //                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
 //
-//                    }
-//
-//                    spinner_gongxu_oracle.getList_result().clear();
-//                }
-
-
-
-
-
-//                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
-//                {
-//                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
-//                    {
 //                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
 //
-//                        for (int n=0;n<select_spinner_xiangdian.getList_result().size();n++)
+//                        for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
 //                        {
-//                            xiangdian[i][j][n] = select_spinner_xiangdian.getList_result().get(n);
+//                            xiangdian[i][j][k] = select_spinner_xiangdian.getList_result().get(k);
 //                        }
-////                        select_spinner_xiangdian.getList_result().clear();
+//                        select_spinner_xiangdian.getList_result().clear();
+//
 //                    }
+//                    spinner_gongxu_oracle.getList_result().clear();
+//
 //                }
-
-                mainHandler_sp_gw.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        setSpinner();
-                    }
-                });
-
-
-            }
-        });
-    }
+//
+//                mainHandler_sp_gw.post(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        setSpinner();
+//                    }
+//                });
+//            }
+//        });
+//    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.crm_main);
-//        Intent intent=getIntent();
-//        String stringValue=intent.getStringExtra("extra");
 
         provinceSpinner = (Spinner)findViewById(R.id.spinner_gongwei);
         citySpinner = (Spinner)findViewById(R.id.spinner_gongxu);
         countySpinner = (Spinner)findViewById(R.id.spinner_xiangdian);
 
-        executorService = Executors.newFixedThreadPool(5);
-
-
+//        executorService = Executors.newFixedThreadPool(5);
 
         Bundle bundle = this.getIntent().getExtras();
-
 
         String xianlu_up_chehao = bundle.getString("chehao");
         String xianlu_up_chexing = bundle.getString("chexing");
         String xianlu_up_zaizhuangxianlu = bundle.getString("zaizhuangxianlu");
         String xianlu_up_zaizhuangxianlu_num = bundle.getString("zaizhuangxianlu_num");
-
 
         text_chehao = (TextView) findViewById(R.id.text_chehao);
         text_chexing = (TextView) findViewById(R.id.text_chexing);
@@ -382,19 +218,8 @@ public class crm_main_activity extends Activity {
         text_zaizhuangxianlu.setText(xianlu_up_zaizhuangxianlu);
 //        text_zaizhuangxianlu_num.setText(xianlu_up_zaizhuangxianlu_num);
 
-
-
-//        setSpinner();
 //        ini_spinner();
-
-        ini_spinner();
-
-        //省级下拉框监听
-
-
-
-
-
+        setSpinner();
 
         sp_text = (TextView) findViewById(R.id.sp_text);
 
@@ -416,6 +241,7 @@ public class crm_main_activity extends Activity {
                 finish();
             }
         });
+
         txt_crm_reset_xianlu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -455,17 +281,16 @@ public class crm_main_activity extends Activity {
     private void setSpinner()
     {
 
-
         //绑定适配器和值
-        SpinnerAdapter provinceAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,gongwei);
+        SpinnerAdapter provinceAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,mainActivity_login.gongwei);
         provinceSpinner.setAdapter(provinceAdapter);
         provinceSpinner.setSelection(4,true);  //设置默认选中项，此处为默认选中第4个值
 
-        SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,gongxu[4]);
+        SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,mainActivity_login.gongxu[4]);
         citySpinner.setAdapter(cityAdapter);
         citySpinner.setSelection(0,true);  //默认选中第0个
 
-        final SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,xiangdian[4][1]);
+        final SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,mainActivity_login.xiangdian[4][1]);
         countySpinner.setAdapter(countyAdapter);
         countySpinner.setSelection(0, true);
 
@@ -481,7 +306,7 @@ public class crm_main_activity extends Activity {
 
                 //将地级适配器的值改变为city[position]中的值
                 SpinnerAdapter cityAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,
-                        gongxu[position]);
+                        mainActivity_login.gongxu[position]);
                 // 设置二级下拉列表的选项内容适配器
                 citySpinner.setAdapter(cityAdapter);
                 provincePosition = position;    //记录当前省级序号，留给下面修改县级适配器时用
@@ -491,7 +316,6 @@ public class crm_main_activity extends Activity {
             {
 
             }
-
         });
 
 
@@ -502,7 +326,7 @@ public class crm_main_activity extends Activity {
             public void onItemSelected(AdapterView<?> arg0, View arg1,int position, long arg3)
             {
                 SpinnerAdapter countyAdapter=new SpinnerAdapter(crm_main_activity.this,android.R.layout.simple_spinner_item,
-                        xiangdian[provincePosition][position]);
+                        mainActivity_login.xiangdian[provincePosition][position]);
                 countySpinner.setAdapter(countyAdapter);
             }
 
@@ -524,8 +348,6 @@ public class crm_main_activity extends Activity {
 
             }
         });
-
-
     }
 
 

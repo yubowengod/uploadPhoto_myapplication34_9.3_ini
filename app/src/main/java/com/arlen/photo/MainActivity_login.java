@@ -5,21 +5,28 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.arlen.photo.SpinnerAdapter.select_spinner_xiangdian;
 import com.arlen.photo.SpinnerAdapter.spinner_gongwei_oracle;
+import com.arlen.photo.SpinnerAdapter.spinner_gongxu_oracle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -54,6 +61,48 @@ public class MainActivity_login extends Activity implements View.OnClickListener
     private long exitTime = 0;
 
     private ExecutorService executorService;
+    private List<String> urlList = new ArrayList<String>();
+    public static String [] gongwei = null;
+    public static String [] [] gongxu = new String[50][50];
+    public static String [] [] [] xiangdian = new String[50][50][50];
+
+
+
+    private void ini_spinner(){
+
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+
+                spinner_gongwei_oracle.getImageromSdk();
+
+                gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
+
+                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
+                {
+                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
+
+                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
+
+                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
+                    {
+                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
+
+                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
+
+                        for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
+                        {
+                            xiangdian[i][j][k] = select_spinner_xiangdian.getList_result().get(k);
+                        }
+                        select_spinner_xiangdian.getList_result().clear();
+
+                    }
+                    spinner_gongxu_oracle.getList_result().clear();
+
+                }
+            }
+        });
+    }
     static int ww = 0;
 
     @Override
@@ -61,6 +110,8 @@ public class MainActivity_login extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
 
+        executorService = Executors.newFixedThreadPool(5);
+        ini_spinner();
 
         fManager = getFragmentManager();
         bindViews();
