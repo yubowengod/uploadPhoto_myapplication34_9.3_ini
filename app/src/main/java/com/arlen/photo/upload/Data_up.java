@@ -4,7 +4,6 @@ package com.arlen.photo.upload;
  */
 
 public class Data_up {
-//    private static String a ="feiyangxiaomi";
 
 //    private static String SERVICE_URL_IP_PORT_webnnn = "http://192.168.1.110:8011/webnnn/";
 

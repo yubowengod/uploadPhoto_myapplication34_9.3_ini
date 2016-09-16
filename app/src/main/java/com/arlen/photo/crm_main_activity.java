@@ -131,66 +131,6 @@ public class crm_main_activity extends Activity {
     }
 
     MainActivity_login mainActivity_login;
-//    private ExecutorService executorService;
-//    private List<String> urlList = new ArrayList<String>();
-//    private String [] gongwei = null;
-//    private String [] [] gongxu = new String[50][50];
-//    private String [] [] [] xiangdian = new String[50][50][50];
-//
-//    private Handler mainHandler_sp_gw = new Handler() {
-//        @Override
-//        public void handleMessage(Message msg) {
-//            // TODO Auto-generated method stub
-//            super.handleMessage(msg);
-//            if (msg.what == 2221) {
-//                //只要在主线程就可以处理ui
-//                ((ImageView) crm_main_activity.this.findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
-//            }
-//        }
-//    };
-//
-//    private void ini_spinner(){
-//
-//        executorService.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                spinner_gongwei_oracle.getImageromSdk();
-//
-//                gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
-//
-//                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
-//                {
-//                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
-//
-//                    spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
-//
-//                    for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
-//                    {
-//                        gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
-//
-//                        select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
-//
-//                        for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
-//                        {
-//                            xiangdian[i][j][k] = select_spinner_xiangdian.getList_result().get(k);
-//                        }
-//                        select_spinner_xiangdian.getList_result().clear();
-//
-//                    }
-//                    spinner_gongxu_oracle.getList_result().clear();
-//
-//                }
-//
-//                mainHandler_sp_gw.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        setSpinner();
-//                    }
-//                });
-//            }
-//        });
-//    }
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -199,8 +139,6 @@ public class crm_main_activity extends Activity {
         provinceSpinner = (Spinner)findViewById(R.id.spinner_gongwei);
         citySpinner = (Spinner)findViewById(R.id.spinner_gongxu);
         countySpinner = (Spinner)findViewById(R.id.spinner_xiangdian);
-
-//        executorService = Executors.newFixedThreadPool(5);
 
         Bundle bundle = this.getIntent().getExtras();
 

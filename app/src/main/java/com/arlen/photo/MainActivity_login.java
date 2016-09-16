@@ -68,6 +68,7 @@ public class MainActivity_login extends Activity implements View.OnClickListener
 
 
 
+
     private void ini_spinner(){
 
         executorService.submit(new Runnable() {
@@ -171,7 +172,7 @@ public class MainActivity_login extends Activity implements View.OnClickListener
                 setSelected();
                 txt_message.setSelected(true);
                 if(fg2 == null){
-                    fg2 = new MyFragment1("第二个Fragment");
+                    fg2 = new MyFragment1("信息列表");
                     fTransaction.add(R.id.ly_content,fg2);
                 }else{
                     fTransaction.show(fg2);
@@ -181,7 +182,7 @@ public class MainActivity_login extends Activity implements View.OnClickListener
                 setSelected();
                 txt_better.setSelected(true);
                 if(fg3 == null){
-                    fg3 = new MyFragment2("第三个Fragment");
+                    fg3 = new MyFragment2("历史列表");
                     fTransaction.add(R.id.ly_content,fg3);
                 }else{
                     fTransaction.show(fg3);
@@ -191,7 +192,7 @@ public class MainActivity_login extends Activity implements View.OnClickListener
                 setSelected();
                 txt_setting.setSelected(true);
                 if(fg4 == null){
-                    fg4 = new MyFragment3("第四个Fragment");
+                    fg4 = new MyFragment3("设置");
                     fTransaction.add(R.id.ly_content,fg4);
                 }else{
                     fTransaction.show(fg4);

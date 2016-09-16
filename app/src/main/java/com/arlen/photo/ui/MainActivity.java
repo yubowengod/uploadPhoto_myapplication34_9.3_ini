@@ -7,9 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,12 +39,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
 
     private Button btn_pic_info;
-    private Button btn_pic_info1;
 
     private TextView pic_info;
-
-    private ProgressBar pb_progressbar;
-
 
     public static PhotoPresenter mPhotoPresenter;
 
@@ -56,8 +54,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     }
 
     private ExecutorService executorService;
-
-    private int flag_btn_upload = 0;
 
 
 
@@ -73,12 +69,52 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
     };
 
+    private TextView txt_upload_4;
+    private TextView txt_upload_3;
+    private TextView txt_upload_reset_yemian;
+    private TextView txt_upload_back;
+
+    private void setSelected(){
+        txt_upload_4.setSelected(false);
+        txt_upload_3.setSelected(false);
+        txt_upload_reset_yemian.setSelected(false);
+        txt_upload_back.setSelected(false);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mPhotoPresenter = new PhotoPresenter(this,"feedback");
+
+        txt_upload_4 = (TextView) findViewById(R.id.txt_upload_4);
+        txt_upload_3 = (TextView) findViewById(R.id.txt_upload_3);
+        txt_upload_reset_yemian = (TextView) findViewById(R.id.txt_upload_reset_yemian);
+        txt_upload_back = (TextView) findViewById(R.id.txt_upload_back);
+
+        txt_upload_reset_yemian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                txt_upload_reset_yemian.setSelected(false);
+                txt_upload_reset_yemian.setSelected(true);
+                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+
+            }
+        });
+        txt_upload_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setSelected();
+                txt_upload_back.setSelected(false);
+                txt_upload_back.setSelected(true);
+                finish();
+            }
+        });
+
         initView();
 
         executorService = Executors.newFixedThreadPool(5);//开启5个线程，其实根据你的情况，一般不会超过8个
@@ -123,10 +159,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 });
             }
         });
-
-
-
-
     }
 
 

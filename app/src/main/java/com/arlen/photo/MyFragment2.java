@@ -10,6 +10,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.GridView;
@@ -29,57 +30,8 @@ import java.util.concurrent.Executors;
  */
 public class MyFragment2 extends Fragment {
 
-    private class SpinnerAdapter extends ArrayAdapter<String> {
-        Context context;
-        String[] items = new String[]{};
-
-        public SpinnerAdapter(final Context context,
-                              final int textViewResourceId, final String[] objects) {
-            super(context, textViewResourceId, objects);
-            this.items = objects;
-            this.context = context;
-        }
-
-        @Override
-        public View getDropDownView(int position, View convertView,
-                                    ViewGroup parent) {
-
-            if (convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(context);
-                convertView = inflater.inflate(
-                        android.R.layout.simple_spinner_item, parent, false);
-            }
-
-            TextView tv = (TextView) convertView.findViewById(android.R.id.text1);
-            tv.setText(items[position]);
-            tv.setGravity(Gravity.CENTER);
-//            tv.setTextColor(Color.BLUE);
-            tv.setTextSize(20);
-            return convertView;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                LayoutInflater inflater = LayoutInflater.from(context);
-                convertView = inflater.inflate(
-                        android.R.layout.simple_spinner_item, parent, false);
-            }
-
-            // android.R.id.text1 is default text view in resource of the android.
-            // android.R.layout.simple_spinner_item is default layout in resources of android.
-
-            TextView tv = (TextView) convertView
-                    .findViewById(android.R.id.text1);
-            tv.setText(items[position]);
-            tv.setGravity(Gravity.CENTER);
-//            tv.setTextColor(Color.BLUE);
-            tv.setTextSize(20);
-            return convertView;
-        }
-    }
-
     private String content;
+
     public MyFragment2(String content) {
         this.content = content;
     }
@@ -92,131 +44,62 @@ public class MyFragment2 extends Fragment {
         return view;
     }
 
-    public static String[] my_upload_pic = {
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-    };
+    /**
+     * 用于展示照片墙的GridView
+     */
+    private GridView mPhotoWall;
 
-    public static String[] my_upload_pic_1 = {
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-    };
-    public static String[] my_upload_pic_2 = {
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-    };
-    public static String[] my_upload_pic_3 = {
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-            "http://192.168.1.110:8011/webnnn/2016951115_8_910.jpg",
-    };
+    /**
+     * GridView的适配器
+     */
+    private PhotoWallAdapter mAdapter;
 
-    private GridView gridview;
-
-    private Spinner spinner_gongwei;
-    private Spinner spinner_gongxu;
-    private Spinner spinner_xiangdian;
-
-
-    private String [] my_sp_gw = null;
-
-    ArrayAdapter<String> gwAdapter_my = null;  //省级适配器
-
-    private Handler mainHandler_sp = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            // TODO Auto-generated method stub
-            super.handleMessage(msg);
-            if (msg.what == 2201) {
-                //只要在主线程就可以处理ui
-                ((ImageView) getActivity().findViewById(msg.arg1)).setImageBitmap((Bitmap) msg.obj);
-            }
-        }
-    };
-
-    private ExecutorService executorService;
-    private List<String> urlList = new ArrayList<String>();
-    ArrayAdapter<String> gongwei_Adapter = null;  //省级适配器
-//    private String[] gongwei = null;
-    private String[] gongwei =  new String[] {"1工位",	"2工位",	"3工位",	"4工位"};
-
-    private void ini_spinner(){
-
-        spinner_gongwei = (Spinner) getActivity().findViewById(R.id.spinner_gongwei);
-        spinner_gongxu = (Spinner) getActivity().findViewById(R.id.spinner_gongxu);
-        spinner_xiangdian = (Spinner) getActivity().findViewById(R.id.spinner_xiangdian);
-
-
-
-
-        executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-                spinner_gongwei_oracle.getImageromSdk();
-                gongwei=new String[spinner_gongwei_oracle.getList_result().size()];
-                for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++){
-                    gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
-                }
-                int www = spinner_gongwei_oracle.getList_result().size();
-
-
-                SpinnerAdapter provinceAdapter1=new SpinnerAdapter(getActivity(),android.R.layout.simple_spinner_item,gongwei);
-                gongwei_Adapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, gongwei);
-//                spinner_gongwei.setAdapter(provinceAdapter1);
-//                spinner_gongwei.setSelection(0,true);  //设置默认选中项，此处为默认选中第4个值
-//
-
-            }
-        });
-    }
+    private int mImageThumbSize;
+    private int mImageThumbSpacing;
 
     public void onActivityCreated(Bundle savedInstanceState) {
 
         super.onActivityCreated(savedInstanceState);
 
-        executorService = Executors.newFixedThreadPool(5);
+        mImageThumbSize = getResources().getDimensionPixelSize(
+                R.dimen.image_thumbnail_size);
+        mImageThumbSpacing = getResources().getDimensionPixelSize(
+                R.dimen.image_thumbnail_spacing);
+        mPhotoWall = (GridView) getActivity().findViewById(R.id.gridview_fg_my);
+        mAdapter = new PhotoWallAdapter(getActivity(), 0, Images.imageThumbUrls,
+                mPhotoWall);
+        mPhotoWall.setAdapter(mAdapter);
+        mPhotoWall.getViewTreeObserver().addOnGlobalLayoutListener(
+                new ViewTreeObserver.OnGlobalLayoutListener() {
+                    @Override
+                    public void onGlobalLayout() {
+                        final int numColumns = (int) Math.floor(mPhotoWall
+                                .getWidth()
+                                / (mImageThumbSize + mImageThumbSpacing));
+                        if (numColumns > 0) {
+                            int columnWidth = (mPhotoWall.getWidth() / numColumns)
+                                    - mImageThumbSpacing;
+                            mAdapter.setItemHeight(columnWidth);
+                            mPhotoWall.getViewTreeObserver()
+                                    .removeGlobalOnLayoutListener(this);
+                        }
+                    }
+                }
+        );
 
-        ini_spinner();
+    }
 
-        gridview = (GridView) getActivity().findViewById(R.id.gridview_fg_my);
+    @Override
+    public void onPause() {
+        super.onPause();
+        mAdapter.fluchCache();
+    }
 
-        gridview.setAdapter(new MyFragment2_gridview_fg_my_ImageListAdapter(getActivity(),my_upload_pic));
-
-        Button btn1 = (Button) getActivity().findViewById(R.id.btn_1);
-
-        btn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gridview.setAdapter(new MyFragment2_gridview_fg_my_ImageListAdapter(getActivity(),my_upload_pic_1));
-            }
-        });
-
-        Button btn2 = (Button) getActivity().findViewById(R.id.btn_2);
-
-        btn2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gridview.setAdapter(new MyFragment2_gridview_fg_my_ImageListAdapter(getActivity(),my_upload_pic_2));
-            }
-        });
-
-        Button btn3 = (Button) getActivity().findViewById(R.id.btn_3);
-
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                gridview.setAdapter(new MyFragment2_gridview_fg_my_ImageListAdapter(getActivity(),my_upload_pic_3));
-            }
-        });
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // 退出程序时结束所有的下载任务
+        mAdapter.cancelAllTasks();
     }
 
 

@@ -94,10 +94,10 @@ public class xianlu_main_activity extends Activity {
         setContentView(R.layout.xianlu_main);
 
         listView = (ListView) findViewById(R.id.xianlu_main_xianlu_listview);
+
         imageCachceUitl = new ImageCachceUitl(getApplicationContext(), handler1);
 
-//        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
-//        urlList.add("http://ww4.sinaimg.cn/large/90bd89ffjw1eqvmd6o8r6j20go0p5ju2.jpg");
+
 
         executorService = Executors.newFixedThreadPool(5);
         listview_download();
@@ -295,15 +295,14 @@ public class xianlu_main_activity extends Activity {
             xianlu_my_image_item_textview=(TextView) convertView.findViewById(R.id.xianlu_my_image_item_textview);
             list_imag.setTag(position);
             final Bitmap bitmap=imageCachceUitl.getBitmapFromUrl(urlList.get(position), position);
-//
-//            Glide
-//                    .with(context)
-//                    .load(imageUrls[position])
-//                    .into((ImageView) convertView);
-
             if (null!=bitmap) {
                 list_imag.setImageBitmap(bitmap);
             }
+
+//            Glide
+//                    .with(xianlu_main_activity.this)
+//                    .load(urlList.get(position))
+//                    .into(list_imag);
             list_imag.setVisibility(View.VISIBLE);
             xianlu_my_image_item_textview.setText(urlList.get(position).toString());
             return convertView;
