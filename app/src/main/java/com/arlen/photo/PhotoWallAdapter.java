@@ -63,8 +63,7 @@ public class PhotoWallAdapter extends ArrayAdapter<String> {
      */
     private int mItemHeight = 0;
 
-    public PhotoWallAdapter(Context context, int textViewResourceId, String[] objects,
-                            GridView photoWall) {
+    public PhotoWallAdapter(Context context, int textViewResourceId, String[] objects,GridView photoWall) {
         super(context, textViewResourceId, objects);
         mPhotoWall = photoWall;
         taskCollection = new HashSet<BitmapWorkerTask>();
@@ -85,8 +84,7 @@ public class PhotoWallAdapter extends ArrayAdapter<String> {
                 cacheDir.mkdirs();
             }
             // 创建DiskLruCache实例，初始化缓存数据
-            mDiskLruCache = DiskLruCache
-                    .open(cacheDir, getAppVersion(context), 1, 10 * 1024 * 1024);
+            mDiskLruCache = DiskLruCache.open(cacheDir, getAppVersion(context), 1, 10 * 1024 * 1024);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -126,12 +126,12 @@ public class xianlu_main_activity extends Activity {
             @Override
             public void run() {
 
-                listview_xianlu_oracle.getImageromSdk();
+//                listview_xianlu_oracle.getImageromSdk();
 
-                listview_xianlu_oracle.getList_result().size();
+//                listview_xianlu_oracle.getList_result().size();
 
                 for (int i = 0; i < listview_xianlu_oracle.getList_result().size(); i++) {
-//                    urlList.add(listview_xianlu_oracle.getList_result().get(i).toString());
+
                     urlList.add(Data_up.getSERVICE_URL_IP_PORT_webnnn()+listview_xianlu_oracle.getList_result().get(i).toString()+".jpg");
                 }
 
@@ -299,10 +299,6 @@ public class xianlu_main_activity extends Activity {
                 list_imag.setImageBitmap(bitmap);
             }
 
-//            Glide
-//                    .with(xianlu_main_activity.this)
-//                    .load(urlList.get(position))
-//                    .into(list_imag);
             list_imag.setVisibility(View.VISIBLE);
             xianlu_my_image_item_textview.setText(urlList.get(position).toString());
             return convertView;

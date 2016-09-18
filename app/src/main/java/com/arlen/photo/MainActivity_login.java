@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.arlen.photo.SpinnerAdapter.select_spinner_xiangdian;
 import com.arlen.photo.SpinnerAdapter.spinner_gongwei_oracle;
 import com.arlen.photo.SpinnerAdapter.spinner_gongxu_oracle;
+import com.arlen.photo.xianlu.xianlu_oracle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -74,6 +75,8 @@ public class MainActivity_login extends Activity implements View.OnClickListener
         executorService.submit(new Runnable() {
             @Override
             public void run() {
+
+                xianlu_oracle.getImageromSdk();
 
                 spinner_gongwei_oracle.getImageromSdk();
 

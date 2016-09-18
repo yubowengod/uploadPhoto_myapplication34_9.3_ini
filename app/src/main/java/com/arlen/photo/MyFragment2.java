@@ -66,8 +66,7 @@ public class MyFragment2 extends Fragment {
         mImageThumbSpacing = getResources().getDimensionPixelSize(
                 R.dimen.image_thumbnail_spacing);
         mPhotoWall = (GridView) getActivity().findViewById(R.id.gridview_fg_my);
-        mAdapter = new PhotoWallAdapter(getActivity(), 0, Images.imageThumbUrls,
-                mPhotoWall);
+        mAdapter = new PhotoWallAdapter(getActivity(), 0, Images.imageThumbUrls,mPhotoWall);
         mPhotoWall.setAdapter(mAdapter);
         mPhotoWall.getViewTreeObserver().addOnGlobalLayoutListener(
                 new ViewTreeObserver.OnGlobalLayoutListener() {
