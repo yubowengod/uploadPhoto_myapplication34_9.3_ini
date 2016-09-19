@@ -64,11 +64,8 @@ public class MainActivity_login extends Activity implements View.OnClickListener
     private ExecutorService executorService;
     private List<String> urlList = new ArrayList<String>();
     public static String [] gongwei = null;
-    public static String [] [] gongxu = new String[50][50];
-    public static String [] [] [] xiangdian = new String[50][50][50];
-
-
-
+    public static String [] [] gongxu = null;
+    public static String [] [] [] xiangdian = null;
 
     private void ini_spinner(){
 
@@ -82,17 +79,27 @@ public class MainActivity_login extends Activity implements View.OnClickListener
 
                 gongwei = new String[spinner_gongwei_oracle.getList_result().size()];
 
+                gongxu = new String[spinner_gongwei_oracle.getList_result().size()][];
+
+                xiangdian = new String[spinner_gongwei_oracle.getList_result().size()][][];
+
                 for(int i=0;i<spinner_gongwei_oracle.getList_result().size();i++)
                 {
                     gongwei[i]=spinner_gongwei_oracle.getList_result().get(i);
 
                     spinner_gongxu_oracle.getImageromSdk(gongwei[i]);
 
+                    gongxu[i] = new String[spinner_gongxu_oracle.getList_result().size()];
+
+                    xiangdian[i] = new String[spinner_gongxu_oracle.getList_result().size()][];
+
                     for (int j = 0;j<spinner_gongxu_oracle.getList_result().size();j++)
                     {
                         gongxu[i][j]=spinner_gongxu_oracle.getList_result().get(j);
 
                         select_spinner_xiangdian.getImageromSdk(gongwei[i],gongxu[i][j]);
+
+                        xiangdian[i][j] = new String[select_spinner_xiangdian.getList_result().size()];
 
                         for (int k = 0;k<select_spinner_xiangdian.getList_result().size();k++)
                         {
